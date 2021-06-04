@@ -51,11 +51,12 @@ const RemoveAccountConfirmation: FC = () => {
   }
 
   const Component = isAuthenticated ? Content : Page;
+  const success = !loading && !error;
 
   return (
     <Component>
       {loading && <Loader size={LoaderSize.Big} />}
-      {!loading && !error && <FormattedMessage id="remove-account.success" />}
+      {success && <FormattedMessage id="remove-account.success" />}
       {generalErrorMessage && (
         <div>
           <FormattedMessage id={generalErrorMessage} />

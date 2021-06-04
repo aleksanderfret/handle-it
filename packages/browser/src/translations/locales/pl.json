@@ -2,6 +2,8 @@
   "account": "Profil",
   "app-name": "Handle It",
   "auth.password-changed": "Twoje hasło zaktualizowane",
+  "auth.remove-account": "Usuń konto",
+  "auth.remove-account.success": "Wysłaliśmy wiadomość na adres {email}. Użyj linku z wiadomości by potwierdzić usunięcie konta.",
   "dashboard": "Pulpit",
   "email": "Email",
   "error.account-not-confirmed": "Konto nie potwierdzone",

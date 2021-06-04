@@ -2,6 +2,7 @@
   "account": "Profile",
   "app-name": "Handle It",
   "auth.password-changed": "Your password has been changed.",
+  "auth.remove-account": "Remove account",
   "auth.remove-account.success": "We have sent an email on address {email}. To remove your account use the link from the email message.",
   "dashboard": "Dashboard",
   "email": "Email",
