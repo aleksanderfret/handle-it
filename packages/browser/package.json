@@ -2,7 +2,6 @@
   "name": "handle-it-browser",
   "version": "0.3.0",
   "description": "Handle It - Browser",
-  "type": "module",
   "main": "src/index.tsx",
   "author": {
     "name": "Aleksander Fret",
