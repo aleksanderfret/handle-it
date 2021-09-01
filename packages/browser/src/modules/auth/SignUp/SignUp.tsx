@@ -64,11 +64,8 @@ export const SignUp: FC = () => {
         ErrorReason.SendingFailedError
       ])(error)
     : [];
-  const {
-    AlreadyExistsError,
-    PasswordMismatch,
-    SendingFailedError
-  } = specificErrors;
+  const { AlreadyExistsError, PasswordMismatch, SendingFailedError } =
+    specificErrors;
 
   const success = !error && !loading && registered;
 

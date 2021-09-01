@@ -12,10 +12,8 @@ interface RouteParams {
 const ResendSignUpConfirmation: FC = () => {
   const { tokenId } = useParams<RouteParams>();
 
-  const [
-    resendSignUpConfirmation,
-    { error, loading }
-  ] = useResendSignUpConfirmationMutation();
+  const [resendSignUpConfirmation, { error, loading }] =
+    useResendSignUpConfirmationMutation();
 
   const handleResendConfirmationLink = async (): Promise<Boolean> => {
     const response = await resendSignUpConfirmation({

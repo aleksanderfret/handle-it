@@ -11,19 +11,22 @@ interface IConfiguration extends WebpackConfiguration {
 
 const config: IConfiguration = {
   devServer: {
-    disableHostCheck: true,
+    allowedHosts: 'all',
+    devMiddleware: {
+      publicPath: '/'
+    },
     historyApiFallback: true,
     hot: true,
-    inline: true,
     open: true,
     port: 4000,
     proxy: {
       '/api': 'http://localhost:5000',
       '/graphql': 'http://localhost:5000/graphql'
     },
-    publicPath: '/',
-    watchOptions: {
-      ignored: /node_modules/
+    static: {
+      watch: {
+        ignored: /node_modules/
+      }
     }
   },
   devtool: 'inline-source-map',

@@ -20,10 +20,8 @@ const RemoveAccountConfirmation: FC = () => {
   const { tokenId } = useParams<RouteParams>();
   const dispatch = useAppDispatch();
   const { isAuthenticated } = useAppState();
-  const [
-    removeAccountConfirmation,
-    { error, loading, client }
-  ] = useRemoveAccountConfirmationMutation();
+  const [removeAccountConfirmation, { error, loading, client }] =
+    useRemoveAccountConfirmationMutation();
   let generalErrorMessage;
 
   useEffect(() => {

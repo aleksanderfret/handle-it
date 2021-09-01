@@ -25,13 +25,14 @@ const templates = {
   [EmailTemplate.ResetPassword]: ResetPasswordConfirmation
 };
 
-const sendMessage = (send: Send) => <T extends Mail>(template: T[0]) => (
-  data: T[1]
-) => {
-  const mailTemplate = templates[template];
+const sendMessage =
+  (send: Send) =>
+  <T extends Mail>(template: T[0]) =>
+  (data: T[1]) => {
+    const mailTemplate = templates[template];
 
-  return send(createMessage(mailTemplate(data)));
-};
+    return send(createMessage(mailTemplate(data)));
+  };
 
 const send = async (messageData: MessageData): SendMailResult => {
   const { recipient, subject, html } = messageData;

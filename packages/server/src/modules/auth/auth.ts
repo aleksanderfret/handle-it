@@ -31,42 +31,39 @@ type Signer = (id: string, tokenVersion?: number) => string;
 
 type Verifier = (token: string, options?: VerifyOptions) => JwtPayload;
 
-const createSigner = (key: string) => (expiration: number): Signer => (
-  id: string,
-  tokenVersion?: number
-) => {
-  const jwtid = randomBytes(32).toString('hex');
-  const iat = Math.floor(new Date().getTime() / 1000);
-  const exp = iat + expiration;
-  const privateKey = Buffer.from(key, 'base64').toString('utf-8');
+const createSigner =
+  (key: string) =>
+  (expiration: number): Signer =>
+  (id: string, tokenVersion?: number) => {
+    const jwtid = randomBytes(32).toString('hex');
+    const iat = Math.floor(new Date().getTime() / 1000);
+    const exp = iat + expiration;
+    const privateKey = Buffer.from(key, 'base64').toString('utf-8');
 
-  const payload = { exp, iat, jwtid, userId: id } as JwtPayload;
+    const payload = { exp, iat, jwtid, userId: id } as JwtPayload;
 
-  if (tokenVersion !== undefined) {
-    payload.tokenVersion = tokenVersion;
-  }
+    if (tokenVersion !== undefined) {
+      payload.tokenVersion = tokenVersion;
+    }
 
-  return sign(payload, privateKey, { algorithm: 'RS256', jwtid });
-};
+    return sign(payload, privateKey, { algorithm: 'RS256', jwtid });
+  };
 
-const createVerifier = (key: string): Verifier => (
-  token: string,
-  options?: VerifyOptions
-) => {
-  const publicKey = Buffer.from(key, 'base64').toString('utf-8');
+const createVerifier =
+  (key: string): Verifier =>
+  (token: string, options?: VerifyOptions) => {
+    const publicKey = Buffer.from(key, 'base64').toString('utf-8');
 
-  const payload = verify(token, publicKey, options);
+    const payload = verify(token, publicKey, options);
 
-  return payload as JwtPayload;
-};
+    return payload as JwtPayload;
+  };
 
-export const createAccessToken = createSigner(ACCESS_PRIVATE_KEY)(
-  ACCESS_TOKEN_EXP
-);
+export const createAccessToken =
+  createSigner(ACCESS_PRIVATE_KEY)(ACCESS_TOKEN_EXP);
 
-export const createRefreshToken = createSigner(REFRESH_PRIVATE_KEY)(
-  REFRESH_TOKEN_EXP
-);
+export const createRefreshToken =
+  createSigner(REFRESH_PRIVATE_KEY)(REFRESH_TOKEN_EXP);
 
 export const createToken = createSigner(TOKEN_PRIVATE_KEY);
 
