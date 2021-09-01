@@ -14,7 +14,7 @@ export class UserResolver {
   @UseMiddleware(isAuth)
   @Query(() => String)
   bye(@Ctx() { user }: Context) {
-    return `Your user id is ${user?.userId}.`;
+    return `Your user id is ${user?.id}.`;
   }
 
   @Query(() => [User])
@@ -30,9 +30,9 @@ export class UserResolver {
         throw new Error();
       }
 
-      const { userId } = user;
+      const { id } = user;
 
-      const currentUser = await User.findOne(userId);
+      const currentUser = await User.findOne(id);
 
       return currentUser;
     } catch (error) {

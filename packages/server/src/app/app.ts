@@ -12,15 +12,15 @@ import { localeMiddleware } from '@app/middlewares/localeMiddleware';
 type RoutesCreator = (routes: Routes) => Router;
 type RouterCreator = (router: Router) => RoutesCreator;
 
-const createRouter: RouterCreator = (router: Router): RoutesCreator => (
-  routes: Routes
-) => {
-  routes.forEach(({ handlers, method, path }) => {
-    router[method](path, ...handlers);
-  });
+const createRouter: RouterCreator =
+  (router: Router): RoutesCreator =>
+  (routes: Routes) => {
+    routes.forEach(({ handlers, method, path }) => {
+      router[method](path, ...handlers);
+    });
 
-  return router;
-};
+    return router;
+  };
 
 const useRoutes = createRouter(Router());
 

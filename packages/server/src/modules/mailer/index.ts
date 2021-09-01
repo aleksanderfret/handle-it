@@ -11,6 +11,7 @@ import {
 } from './types';
 import EmailTemplate from './enums';
 import SignUpConfirmation from './templates/SignUpConfirmation';
+import RemoveAccountConfirmation from './templates/RemoveAccountConfirmation';
 import ResetPasswordConfirmation from './templates/ResetPasswordConfirmation';
 import createMessage from './createMessage';
 
@@ -20,16 +21,18 @@ SendGridMail.setApiKey(SENDGRID_API_KEY);
 
 const templates = {
   [EmailTemplate.SignUp]: SignUpConfirmation,
+  [EmailTemplate.RemoveAccount]: RemoveAccountConfirmation,
   [EmailTemplate.ResetPassword]: ResetPasswordConfirmation
 };
 
-const sendMessage = (send: Send) => <T extends Mail>(template: T[0]) => (
-  data: T[1]
-) => {
-  const mailTemplate = templates[template];
+const sendMessage =
+  (send: Send) =>
+  <T extends Mail>(template: T[0]) =>
+  (data: T[1]) => {
+    const mailTemplate = templates[template];
 
-  return send(createMessage(mailTemplate(data)));
-};
+    return send(createMessage(mailTemplate(data)));
+  };
 
 const send = async (messageData: MessageData): SendMailResult => {
   const { recipient, subject, html } = messageData;
@@ -50,5 +53,9 @@ export const sendSignUpConfirmation = sendMail<SignUpMail>(
 );
 
 export const sendResetPasswordConfirmation = sendMail<ResetPasswordMail>(
+  EmailTemplate.ResetPassword
+);
+
+export const sendRemoveAccountConfirmation = sendMail<ResetPasswordMail>(
   EmailTemplate.ResetPassword
 );

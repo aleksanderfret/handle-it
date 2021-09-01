@@ -3,6 +3,7 @@ import { Switch } from 'react-router-dom';
 
 import Dashboard from 'modules/dashboard';
 import {
+  RemoveAccountConfirmation,
   ResetPassword,
   SignIn,
   SignUp,
@@ -34,6 +35,11 @@ export const Layout: FC = () => (
         exact
         path={Path.SignUpConfirmation}
       />
+      <PublicRoute
+        component={RemoveAccountConfirmation}
+        exact
+        path={Path.RemoveAccount}
+      />
       <PublicRoute component={ResetPassword} exact path={Path.ResetPassword} />
       <PublicRoute
         component={UpdatePassword}
@@ -49,6 +55,11 @@ export const Layout: FC = () => (
       <PrivateRoute component={LeftBar} noFallback />
     </Switch>
     <Switch>
+      <PrivateRoute
+        component={RemoveAccountConfirmation}
+        exact
+        path={Path.RemoveAccount}
+      />
       <PrivateRoute component={Bye} exact path={Path.Organizations} />
       <PrivateRoute component={Dashboard} exact path={Path.Dashboard} />
       <PrivateRoute component={Account} exact path={Path.Account} />

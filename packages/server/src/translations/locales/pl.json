@@ -5,7 +5,10 @@
   "mail.register.title": "Potwierdź rejestrację w aplikacji Handle It",
   "mail.register.confirm-link": "Potwierdź rejestrację",
   "mail.register.message": "Dzień dobry {email}. Witamy na pokładzie. Użyj linku by potwierdzić rejestraję w Handle It: ",
+  "mail.remove-account.title": "Usuń swoje konto w Handle It",
+  "mail.remove-account.confirm-link": "Usuń konto",
+  "mail.remove-account.message": "Dzień dobry {email}. Zgłosiłe(a)ś nam, że chcesz usunąć swoje konto w Handle It. Jeśli to Ty i chcesz usnąć konto, użyj linku by to zrobić: ",
   "mail.reset-password.title": "Zresetuj swoje hasło do Handle It",
   "mail.reset-password.confirm-link": "Zresetuj hasło",
-  "mail.reset-password.message": "Dzień dobry {email}. Zgłosiłeś nam, że zapomniałeś hasła. Jeśli to ty i chcesz zresetować hasło użyj linku by zresetować swoje hasło: "
+  "mail.reset-password.message": "Dzień dobry {email}. Zgłosiłe(a)ś nam, że zapomniałe(a)ś hasła. Jeśli to Ty i chcesz zresetować hasło użyj linku by to zrobić: "
 }

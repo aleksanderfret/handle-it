@@ -1,5 +1,6 @@
 import { Request, RequestHandler, Response } from 'express';
 
+import User from '@modules/user/entity';
 import { Crud } from '@shared/enums';
 
 export type Route = {
@@ -10,14 +11,10 @@ export type Route = {
 
 export type Routes = Array<Route>;
 
-export interface UserContext {
-  userId: string;
-}
-
 export type Locale = 'en' | 'pl';
 
 export interface Context {
   req: Request;
   res: Response;
-  user?: UserContext;
+  user?: User;
 }

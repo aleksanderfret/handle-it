@@ -4,7 +4,10 @@
   "mail.footer.service-provider": "{app} is a service provided by {COMPANY}",
   "mail.register.title": "Confirm registration in Handle It",
   "mail.register.confirm-link": "Confirm registration",
-  "mail.register.message": "Hello {email}. Welcome on board. Use the following link to confirm your registration:",
+  "mail.register.message": "Hello {email}. Welcome on board. Use the following link to confirm your registration: ",
+  "mail.remove-account.title": "Remove your account in Handle It",
+  "mail.remove-account.confirm-link": "Remove account",
+  "mail.remove-account.message": "Hello {email}. You told us that you would like to remove your account. If that sounds right use the following link to remove it: ",
   "mail.reset-password.title": "Reset your password in Handle It",
   "mail.reset-password.confirm-link": "Reset password",
   "mail.reset-password.message": "Hello {email}. You told us that you forgot your password. If that sounds right use the following link to set the new one: "

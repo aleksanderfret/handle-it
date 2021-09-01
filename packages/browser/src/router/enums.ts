@@ -11,6 +11,7 @@ enum Path {
   Organizations = '/organizations',
   Project = '/projects/:projectId',
   Projects = '/projects',
+  RemoveAccount = '/remove-account/:tokenId',
   ResetPassword = '/reset-password',
   Settings = '/settings',
   SignIn = '/sign-in',

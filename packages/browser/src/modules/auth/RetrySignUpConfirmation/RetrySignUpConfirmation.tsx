@@ -11,10 +11,8 @@ interface RetrySignUpConfirmationProps {
 const RetrySignUpConfirmation: FC<RetrySignUpConfirmationProps> = ({
   email
 }) => {
-  const [
-    retrySignUpConfirmation,
-    { error, loading }
-  ] = useRetrySignUpConfirmationMutation();
+  const [retrySignUpConfirmation, { error, loading }] =
+    useRetrySignUpConfirmationMutation();
 
   const handleRetrySignUpConfirmation = async (): Promise<Boolean> => {
     const response = await retrySignUpConfirmation({

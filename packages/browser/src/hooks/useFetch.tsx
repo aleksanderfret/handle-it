@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 interface State<T> {
   loading: boolean;
   data?: T;
-  error?: string;
+  error?: unknown;
 }
 
 const useFetch = <T extends unknown>(url: string, options?: any): State<T> => {
   const [data, setData] = useState();
-  const [error, setError] = useState();
+  const [error, setError] = useState<unknown>();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const useFetch = <T extends unknown>(url: string, options?: any): State<T> => {
             setData(json);
           }
         }
-      } catch (error) {
+      } catch (error: unknown) {
         if (!aborted) setError(error);
       } finally {
         if (!aborted) {

@@ -28,10 +28,11 @@
     }
   ],
   "eslint.trace.server": "off",
-  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "js/ts.implicitProjectConfig.experimentalDecorators": true,
   "cSpell.words": ["varchar"],
   "prettier.arrowParens": "avoid",
   "prettier.tabWidth": 2,
   "prettier.singleQuote": true,
-  "prettier.trailingComma": "none"
+  "prettier.trailingComma": "none",
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

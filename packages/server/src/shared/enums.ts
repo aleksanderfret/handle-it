@@ -43,8 +43,9 @@ export enum Type {
 }
 
 export enum TokenType {
-  SignUpConfirmToken = 'SignUpConfirmToken',
-  ResetPasswordToken = 'ResetPasswordToken'
+  DeleteAccountToken = 'DeleteAccountToken',
+  ResetPasswordToken = 'ResetPasswordToken',
+  SignUpConfirmToken = 'SignUpConfirmToken'
 }
 
 registerEnumTypes([

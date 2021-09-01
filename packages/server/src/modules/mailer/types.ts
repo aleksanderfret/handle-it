@@ -74,14 +74,19 @@ export type SignUpMail = [
   { locale: Locale; recipient: string; redirectUrl: string; user: User }
 ];
 
+export type RemoveAccountMail = [
+  EmailTemplate.RemoveAccount,
+  { locale: Locale; recipient: string; redirectUrl: string; user: User }
+];
+
 export type ResetPasswordMail = [
   EmailTemplate.ResetPassword,
   { locale: Locale; recipient: string; redirectUrl: string; user: User }
 ];
 
-export type Mail = SignUpMail | ResetPasswordMail;
+export type Mail = SignUpMail | RemoveAccountMail | ResetPasswordMail;
 
-export interface ComponentProps {
+export interface MailComponentsProps {
   key: string;
   locale?: Locale;
 }

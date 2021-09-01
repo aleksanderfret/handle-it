@@ -2,7 +2,7 @@ import getIntl from '@translations/intl';
 import { AuthMailData, MailDataCreator } from '../types';
 import { Link, Paragraph } from './components';
 
-const ResetPasswordConfirmation: MailDataCreator<AuthMailData> = mailData => {
+const RemoveAccountConfirmation: MailDataCreator<AuthMailData> = mailData => {
   const {
     locale,
     recipient,
@@ -11,10 +11,10 @@ const ResetPasswordConfirmation: MailDataCreator<AuthMailData> = mailData => {
   } = mailData;
   const { formatMessage: f } = getIntl(locale);
 
-  const title = f({ id: 'mail.reset-password.title' });
+  const title = f({ id: 'mail.remove-account.title' });
   const content = Paragraph()(
-    f({ id: 'mail.reset-password.message' }, { email }),
-    Link({ href: redirectUrl })(f({ id: 'mail.reset-password.confirm-link' }))
+    f({ id: 'mail.remove-account.message' }, { email }),
+    Link({ href: redirectUrl })(f({ id: 'mail.remove-account.confirm-link' }))
   );
 
   const data = { content, locale, title };
@@ -22,4 +22,4 @@ const ResetPasswordConfirmation: MailDataCreator<AuthMailData> = mailData => {
   return { data, recipient, subject: title };
 };
 
-export default ResetPasswordConfirmation;
+export default RemoveAccountConfirmation;

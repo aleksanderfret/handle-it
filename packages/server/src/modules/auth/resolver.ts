@@ -21,11 +21,12 @@ import {
   verifyToken
 } from '@modules/auth/auth';
 import Token from './entity';
-import User from '@modules/user/entity';
 import {
+  sendRemoveAccountConfirmation,
   sendResetPasswordConfirmation,
   sendSignUpConfirmation
 } from '@modules/mailer';
+import User from '@modules/user/entity';
 import { BadRequestError, ValidationError } from '@errors/index';
 import { ErrorReason } from '@errors/enums';
 import environment from '@env/env';
@@ -33,6 +34,7 @@ import environment from '@env/env';
 const {
   APP_URL,
   CONFIRM_SIGN_UP_TOKEN_EXP,
+  REMOVE_ACCOUNT_TOKEN_EXP,
   RESET_PASSWORD_TOKEN_EXP
 } = environment;
 @ObjectType()
@@ -198,6 +200,105 @@ export class AuthResolver {
         ErrorReason.SendingFailedError
       );
     }
+
+    return true;
+  }
+
+  @UseMiddleware(isAuth)
+  @Mutation(() => Boolean)
+  async removeAccount(
+    @Arg('email') email: string,
+    @Arg('password') password: string,
+    @Ctx() { req: { locale }, user }: Context
+  ) {
+    if (user) {
+      const { id, password } = user;
+
+      const valid = await compare(password, user.password);
+
+      if (email !== user.email && !valid) {
+        throw new ValidationError(
+          'Invalid credentials',
+          ErrorReason.InvalidCredentialsError
+        );
+      }
+
+      await Token.delete({ type: TokenType.DeleteAccountToken, user: user });
+
+      const token = createToken(REMOVE_ACCOUNT_TOKEN_EXP)(id);
+
+      const {
+        identifiers: [{ id: tokenId }]
+      } = await Token.insert({
+        token,
+        type: TokenType.ResetPasswordToken,
+        user
+      });
+
+      const redirectUrl = `${APP_URL}/remove-account/${tokenId}`;
+
+      try {
+        await sendRemoveAccountConfirmation({
+          locale,
+          recipient: email,
+          redirectUrl,
+          user: { email }
+        });
+      } catch {
+        throw new BadRequestError(
+          'Sending confirmation failed',
+          ErrorReason.SendingFailedError
+        );
+      }
+    }
+  }
+
+  @Mutation(() => Boolean)
+  async removeAccountConfirmation(@Arg('tokenId') tokenId: string) {
+    const token = await Token.findOne({ id: tokenId });
+
+    if (!token) {
+      // TODO If there is no token and there is no user also
+      // this account was deleted due to email not being
+      // confirmed for n days
+      throw new BadRequestError();
+    }
+
+    const { token: jwtToken } = token;
+
+    const payload = verifyToken(jwtToken, {
+      ignoreExpiration: true
+    });
+
+    const { exp, userId: id } = payload;
+
+    if (Date.now() >= exp * 1000) {
+      throw new ValidationError(
+        'Link has expired',
+        ErrorReason.ExpiredLinkError
+      );
+    }
+
+    const user = await User.findOne({ id });
+
+    if (user) {
+      const { email } = user;
+
+      const hashedEmail = await hash(email, 12);
+
+      user.avatarUrl = '';
+      user.deletedAt = new Date();
+      user.email = hashedEmail;
+      user.name = '';
+      user.password = '';
+      user.provider = '';
+      user.status = AccountStatus.Deleted;
+
+      await user.save();
+      await Token.delete({ id: tokenId });
+    }
+
+    // TODO revoke tokens
 
     return true;
   }

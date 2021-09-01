@@ -7,8 +7,8 @@ interface ConfirmSignUpArgs {
 }
 
 const CONFIRM_SIGN_UP = gql`
-  mutation retrySendingConfirmation($email: String!) {
-    retrySendingConfirmation(email: $email)
+  mutation confirmSignUp($tokenId: String!) {
+    confirmSignUp(tokenId: $tokenId)
   }
 `;
 

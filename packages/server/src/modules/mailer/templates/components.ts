@@ -1,8 +1,10 @@
 import { createElement, ReactNode, ExoticComponent, Fragment } from 'react';
 
-const element = (name: string | ExoticComponent) => (props?: {} | null) => (
-  ...children: ReactNode[]
-) => createElement(name, props, ...children);
+const element =
+  (name: string | ExoticComponent) =>
+  (props?: {} | null) =>
+  (...children: ReactNode[]) =>
+    createElement(name, props, ...children);
 
 export const Cell = element('td');
 export const Row = element('tr');

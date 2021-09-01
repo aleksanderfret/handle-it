@@ -33,12 +33,13 @@ export default class User extends BaseEntity {
   @Column({ length: 256, nullable: true, type: 'varchar' })
   avatarUrl!: string;
 
-  @Field()
-  @Column({ length: 100, nullable: false, type: 'varchar', unique: true })
-  email!: string;
+  @Field({ nullable: true })
+  @Column({ nullable: true, type: 'timestamptz' })
+  deletedAt!: Date;
 
-  @Column({ length: 128, nullable: true, type: 'varchar', unique: true })
-  hashedEmail!: string;
+  @Field()
+  @Column({ length: 128, nullable: false, type: 'varchar', unique: true })
+  email!: string;
 
   @Field({ nullable: true })
   @Column({ length: 50, nullable: true, type: 'varchar' })

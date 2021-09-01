@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { ChangePassword } from 'modules/auth';
+import { ChangePassword, RemoveAccount } from 'modules/auth';
 import Content from 'ui/Content';
 
 const Account: FC = () => (
@@ -12,6 +12,9 @@ const Account: FC = () => (
       </h2>
       <div>
         <ChangePassword />
+      </div>
+      <div>
+        <RemoveAccount />
       </div>
     </div>
   </Content>

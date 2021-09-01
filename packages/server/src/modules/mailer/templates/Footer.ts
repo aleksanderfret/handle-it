@@ -1,6 +1,6 @@
 import environment from '@env/env';
 import getIntl from '@translations/intl';
-import { ComponentProps } from '@modules/mailer/types';
+import { MailComponentsProps } from '@modules/mailer/types';
 import {
   Cell,
   Link,
@@ -18,7 +18,7 @@ const {
 const address = COMPANY_ADDRESS.replace(/_/g, ' ');
 const phone = COMPANY_PHONE.replace(/_/g, ' ');
 
-const Footer = ({ locale = 'en', ...rest }: ComponentProps) => {
+const Footer = ({ locale = 'en', ...rest }: MailComponentsProps) => {
   const { formatMessage: f } = getIntl(locale);
 
   return Row(rest)(

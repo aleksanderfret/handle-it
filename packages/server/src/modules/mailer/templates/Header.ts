@@ -1,5 +1,5 @@
 import environment from '@env/env';
-import { ComponentProps } from '@modules/mailer/types';
+import { MailComponentsProps } from '@modules/mailer/types';
 import {
   Cell,
   Link,
@@ -9,7 +9,7 @@ import {
 
 const { APP_NAME, APP_URL } = environment;
 
-const Header = (props: ComponentProps) =>
+const Header = (props: MailComponentsProps) =>
   Row(props)(Cell()(Paragraph()(Link({ href: APP_URL })(APP_NAME))));
 
 export default Header;
