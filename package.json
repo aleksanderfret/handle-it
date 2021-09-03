@@ -39,7 +39,8 @@
     "start": "lerna run dev --stream",
     "stylelint": "lerna run stylelint",
     "stylelint:fix": "lerna run stylelint:fix",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "test:watch": "lerna run test:watch"
   },
   "browserslist": [
     ">0.2%",
